@@ -69,6 +69,7 @@ class App extends React.Component {
         <button onClick={this.addUser}> Add new profile</button>
       </div>
     )
+    /* <button onClick={this.addUser.bind(this)}> Add new profile</button> */
   }
 }
 
