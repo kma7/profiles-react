@@ -3,6 +3,8 @@ import React from 'react'
 import Profile from './Profile.jsx'
 import AddProfile from './AddProfile.jsx'
 
+import {getProfiles} from '../utils/profileApi.js'
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -13,16 +15,11 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/profiles')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          profiles: data
-        })
+    getProfiles().then(profiles => {
+      this.setState({
+        profiles: profiles
       })
-      .catch(err => {
-        console.log(err)
-      })
+    })
   }
 
   addUser(newProfile) {
