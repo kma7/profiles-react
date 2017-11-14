@@ -7,23 +7,24 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      profiles: [
-        {
-          name: 'John',
-          age: 30,
-          bio: 'enjoys swimming and biking',
-          hobbies: ['swimming', 'biking', 'talking']
-        },
-        {
-          name: 'Mark',
-          age: 22,
-          bio: 'enjoys reading',
-          hobbies: ['gardening', 'sleeping']
-        }
-      ]
+      profiles: []
     }
     this.addUser = this.addUser.bind(this)
   }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/profiles')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          profiles: data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   addUser(newProfile) {
     this.setState({
       profiles: this.state.profiles.concat(newProfile)
